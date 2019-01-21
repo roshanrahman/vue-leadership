@@ -4,8 +4,8 @@
       <img :src="getImage()" style="max-height: 2.1em; padding-left:1em;">
       <v-toolbar-title class="headline text-uppercase"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat href="/graphql" target="_blank">
-        <span class="mr-2">GraphQL Playground</span>
+      <v-btn color="primary" flat @click="changeTheme">
+        <span class="mr-2">TOGGLE THEME</span>
       </v-btn>
     </v-toolbar>
 
@@ -16,18 +16,16 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
 import imgDark from "./assets/full-logo-white.svg";
 import imgLight from "./assets/full-logo.svg";
+import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
-  components: {
-    HelloWorld
-  },
+  components: { HelloWorld },
   data() {
     return {
-      dark: true,
+      dark: false,
       imgLight,
       imgDark
     };
