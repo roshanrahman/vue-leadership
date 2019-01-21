@@ -12,6 +12,12 @@
     <v-content>
       <HelloWorld/>
     </v-content>
+    <v-footer class="pa-3">
+      <v-spacer></v-spacer>
+      <div>&copy; Developed by the
+        <b>CS Entry</b> team
+      </div>
+    </v-footer>
   </v-app>
 </template>
 
