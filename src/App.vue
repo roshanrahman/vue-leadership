@@ -1,17 +1,11 @@
 <template>
-  <v-app>
+  <v-app :dark="dark">
     <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
+      <img :src="getImage()" style="max-height: 2.1em; padding-left:1em;">
+      <v-toolbar-title class="headline text-uppercase"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
+      <v-btn flat href="/graphql" target="_blank">
+        <span class="mr-2">GraphQL Playground</span>
       </v-btn>
     </v-toolbar>
 
@@ -22,17 +16,29 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import HelloWorld from "./components/HelloWorld";
+import imgDark from "./assets/full-logo-white.svg";
+import imgLight from "./assets/full-logo.svg";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld
   },
-  data () {
+  data() {
     return {
-      //
+      dark: true,
+      imgLight,
+      imgDark
+    };
+  },
+  methods: {
+    changeTheme() {
+      this.dark = !this.dark;
+    },
+    getImage() {
+      return this.dark ? this.imgDark : this.imgLight;
     }
   }
-}
+};
 </script>
