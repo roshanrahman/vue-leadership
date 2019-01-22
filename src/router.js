@@ -1,22 +1,21 @@
 import Vue from "vue";
 import Router from "vue-router";
-import AddStudents from "./components/AddStudents";
-import AddCourses from "./components/AddCourses";
-
+import AddStudents from "./components/pages/dashboard/add-student-page/AddStudentPage";
+import AddCourses from "./components/pages/dashboard/add-course-page/AddCoursePage";
+import Dashboard from "./components/pages/dashboard/Dashboard";
+import LoginPage from "./components/pages/login-page/LoginPage";
 Vue.use(Router);
 
 export default new Router({
   routes: [
-    { path: "/add-students", component: AddStudents },
-    { path: "/add-courses", component: AddCourses },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-    }
+      path: "/dashboard",
+      component: Dashboard,
+      children: [
+        { path: "/add-students", component: AddStudents },
+        { path: "/add-courses", component: AddCourses }
+      ]
+    },
+    { path: "/", component: LoginPage }
   ]
 });
