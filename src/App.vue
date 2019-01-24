@@ -25,9 +25,6 @@ export default {
       if (this.session.id) {
         this.goToDashboard();
       }
-      console.log("LOCAL STORAGE");
-
-      console.log(this.sessionFromLS);
     }
   },
   components: {

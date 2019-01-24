@@ -13,7 +13,7 @@ const AUTH_TOKEN = "apollo-token";
 
 // Http endpoint
 const httpEndpoint =
-  process.env.VUE_APP_GRAPHQL_HTTP || "http://192.168.47.204:5430/";
+  process.env.VUE_APP_GRAPHQL_HTTP || "https://leadership-board.herokuapp.com/";
 // Files URL root
 export const filesRoot =
   process.env.VUE_APP_FILES_ROOT ||
