@@ -11,7 +11,9 @@
           <p style="color: teal" class="title">A clean, straightforward platform for data entry</p>
           <v-divider></v-divider>
           <br>
-          <h3>Developed By Team 404 FOUND</h3>
+          <h3>Developed By</h3>
+          <br>
+          <img src="../../../assets/team.svg" alt="Team logo">
           <br>
           <b>
             <p>The students of BE/CSE 2016-2020</p>

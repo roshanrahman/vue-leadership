@@ -44,14 +44,7 @@
         </v-container>
       </v-flex>
     </v-layout>
-    <v-footer>
-      <v-spacer></v-spacer>
-      <div>
-        Developed by the
-        <b>CS Entry</b> team
-      </div>
-      <v-spacer></v-spacer>
-    </v-footer>
+
     <v-dialog v-model="invalidUsernameDialog" max-width="290">
       <v-card>
         <v-card-title class="headline">Username is invalid</v-card-title>
