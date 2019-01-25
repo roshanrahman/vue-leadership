@@ -15,7 +15,11 @@
             <p
               class="title"
             >As administrator, you can add, view and delete student, course, faculty data from database.</p>
-            <p>If you'd like to add leadership board entries, please use your faculty account.</p>
+            <p>You can also view and download all the Leadership Board entries submitted by faculty.</p>
+            <p>
+              If you'd like to
+              <i>add</i> leadership board entries, please use your faculty account.
+            </p>
           </div>
           <div v-if="!isAdmin">
             <p
