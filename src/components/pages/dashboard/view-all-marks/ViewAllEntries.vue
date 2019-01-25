@@ -135,7 +135,7 @@ export default {
       document.body.removeChild(element);
     },
     onDownloadClicked() {
-      this.download("leadership-entries.csv", this.viewRecordsCSV);
+      this.download("leadership-entries.csv", this.viewRecordsCSV.csv);
     },
     showDeleteRecordDialog(Record) {
       this.viewDeleteRecordDialogContent = Record;
