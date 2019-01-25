@@ -14,16 +14,39 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Material+Icons"
     />
+    <style>
+      body {
+        background-color: #00a878;
+        color: white;
+        font-family: "Roboto", Arial, Helvetica, sans-serif;
+      }
+
+      .loading {
+        width: auto;
+        height: auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <noscript>
-      <h3>Please enable JavaScript</h3>
+      <h3>Please enable JavaScript!</h3>
       <strong
         >We're sorry but CS Entry doesn't work properly without JavaScript
         enabled. Please enable it to continue.</strong
       >
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+      <div class="loading">
+        <img src="full-logo-white.svg" />
+        <p>Loading, please wait...</p>
+      </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
