@@ -43,7 +43,7 @@
             <v-list-tile-action>
               <v-icon>visibility</v-icon>
             </v-list-tile-action>
-            <v-list-tile-title>View entries</v-list-tile-title>
+            <v-list-tile-title>View Entries</v-list-tile-title>
           </v-list-tile>
         </v-list-group>
         <v-list-group prepend-icon="https" value="true" v-if="isAdmin()">

@@ -102,7 +102,7 @@ export default {
           value: "points"
         }
       ],
-      viewRecords: [],
+      viewRecords: { records: [] },
       viewRecordsCSV: ""
     };
   },
@@ -190,14 +190,15 @@ export default {
     `,
     viewRecordsCSV: {
       query: gql`
-        query ViewRecords($csv: Boolean) {
-          viewRecords(csv: $csv) {
+        query ViewRecordsCSV($csv: Boolean, $facultyId: String) {
+          viewRecordsCSV(csv: $csv, facultyId: $facultyId) {
             csv
           }
         }
       `,
       variables: {
-        csv: true
+        csv: true,
+        facultyId: this.session.id
       }
     }
   }
