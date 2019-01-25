@@ -51,6 +51,15 @@
             <v-list-tile-title>Admin Actions</v-list-tile-title>
           </v-list-tile>
           <v-list-tile
+            @click="selectNavItem('view-all-entries')"
+            :disabled="currentNavItem === 'view-all-entries'"
+          >
+            <v-list-tile-action>
+              <v-icon>star</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>View Leadership Board Entries</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile
             @click="selectNavItem('view-students')"
             :disabled="currentNavItem === 'view-students'"
           >
@@ -268,6 +277,11 @@ export default {
         case "view-entries": {
           this.$router.push("view-entries");
           this.currentNavItem = "view-entries";
+          break;
+        }
+        case "view-all-entries": {
+          this.$router.push("view-all-entries");
+          this.currentNavItem = "view-all-entries";
           break;
         }
         case "about": {

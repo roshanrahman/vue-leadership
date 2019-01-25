@@ -4,11 +4,11 @@
       <v-flex xs10 offset-xs1>
         <v-card>
           <v-card-title primary-title>
-            <h3 class="headline">View Mark Entries</h3>
+            <h3 class="headline">View All Mark Entries</h3>
             <v-spacer></v-spacer>
 
             <v-btn flat color="primary" @click="onDownloadClicked">
-              <v-icon style="padding-right:5px;">save</v-icon>Download as Excel CSV
+              <v-icon style="padding-right:5px;">save</v-icon>Download all as Excel CSV
             </v-btn>
 
             <v-spacer></v-spacer>
@@ -63,6 +63,9 @@ import gql from "graphql-tag";
 export default {
   computed: {
     filteredRecords() {
+      if (this.session.isAdmin) {
+        return this.viewRecords.records;
+      }
       const recordList = this.viewRecords.records.filter(
         record => record.faculty.id === this.adminId
       );
@@ -74,6 +77,7 @@ export default {
       search: null,
       adminId: "",
       snackbar: false,
+      session: {},
       viewDeleteRecordDialog: false,
       viewDeleteRecordDialogContent: [],
       headers: [
@@ -109,6 +113,7 @@ export default {
   mounted() {
     console.log("Mounted");
     console.log(this.viewRecords);
+    this.session = JSON.parse(localStorage.session);
     this.adminId = JSON.parse(localStorage.session).id;
     console.log("USER ID" + this.adminId);
     this.$apollo.queries.viewRecords.refetch();
@@ -192,16 +197,15 @@ export default {
     `,
     viewRecordsCSV: {
       query: gql`
-        query ViewRecordsCSV($csv: Boolean, $facultyId: String) {
-          viewRecordsCSV(csv: $csv, facultyId: $facultyId) {
+        query ViewRecordsCSV($csv: Boolean) {
+          viewRecordsCSV(csv: $csv) {
             csv
           }
         }
       `,
       variables() {
         return {
-          csv: true,
-          facultyId: this.adminId
+          csv: true
         };
       }
     }

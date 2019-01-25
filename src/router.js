@@ -10,6 +10,7 @@ import ViewCourses from "./components/pages/dashboard/view-courses/ViewCourses";
 import ViewFaculty from "./components/pages/dashboard/view-faculty/ViewFaculty";
 import ViewStudents from "./components/pages/dashboard/view-students/ViewStudents";
 import ViewEntries from "./components/pages/dashboard/view-marks/ViewEntries";
+import ViewAllEntries from "./components/pages/dashboard/view-all-marks/ViewAllEntries"
 import About from "./components/pages/dashboard/AboutPage";
 import Home from "./components/pages/dashboard/HomePage";
 Vue.use(Router);
@@ -30,6 +31,7 @@ export default new Router({
         { path: "/view-students", component: ViewStudents },
         { path: "/view-faculty", component: ViewFaculty },
         { path: "/view-entries", component: ViewEntries },
+        { path: "/view-all-entries", component: ViewAllEntries },
         { path: "/about", component: About }
       ]
     },
