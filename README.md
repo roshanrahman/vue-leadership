@@ -85,4 +85,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 #
 
-<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTYu%0D%0AMzIgMTcwLjAyIj4KICA8cGF0aCBmaWxsPSIjNDJiODgzIiBkPSJNMTIwLjgzIDBMOTguMTYgMzku%0D%0AMjYgNzUuNDkgMEgwbDk4LjE2IDE3MC4wMkwxOTYuMzIgMGgtNzUuNDl6Ii8+CiAgPHBhdGggZmls%0D%0AbD0iIzM1NDk1ZSIgZD0iTTEyMC44MyAwTDk4LjE2IDM5LjI2IDc1LjQ5IDBIMzkuMjZsNTguOSAx%0D%0AMDIuMDFMMTU3LjA2IDBoLTM2LjIzeiIvPgo8L3N2Zz4K" alt="Vue.js logo" width="100">
+<img src="https://github.com/vuejs/art/raw/master/logo.png" alt="Vue.js logo" width="100">
