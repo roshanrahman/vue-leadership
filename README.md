@@ -7,7 +7,7 @@
 ### Components
 
 - [_Android client_](https://github.com/ThalapathySiva/LeadershipBoard)
-- [*Vue.js based web client*](You're here)
+- _Vue.js based web client_ (You're here)
 - [_GraphQL/Postgres based TypeScript server_](https://github.com/vineeshvk/Leadership-Board-Backend)
 
 ### Vue.js web panel for Faculty and Administrator
@@ -34,7 +34,7 @@ A web application for faculty to perform data entry, and for admins to manage da
 - **Adding data:** Admin can add new student, course and faculty records.
 - **Viewing data:** Data can be viewed elegantly thanks to Vuetify data table, fully sortable and searchable.
 
-### Download
+### Preview
 
 - You can try the deployed version [here](https://leadership-board.herokuapp.com/)
 
@@ -76,11 +76,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Screenshots
 
-<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/sign.png" alt="Sign in" width="300">
-<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/dashboard.png" alt="Sign in" width="300">
-<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/new.png" alt="Sign in" width="300">
-<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/mark.png" alt="Sign in" width="300">
-<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/view.png" alt="Sign in" width="300">
-<img src="https://github.com/ThalapathySiva/LeadershipBoard/raw/master/assets/download.png" alt="Sign in" width="300">
+<img src="https://github.com/roshanrahman/vue-leadership/raw/master/github_assets/1.png" alt="Sign in">
+<img src="https://github.com/roshanrahman/vue-leadership/raw/master/github_assets/2.png" alt="Dashboard">
+<img src="https://github.com/roshanrahman/vue-leadership/raw/master/github_assets/3.png" alt="Panel">
+<img src="https://github.com/roshanrahman/vue-leadership/raw/master/github_assets/4.png" alt="Adding marks">
+<img src="https://github.com/roshanrahman/vue-leadership/raw/master/github_assets/5.png" alt="Viewing">
+<img src="https://github.com/roshanrahman/vue-leadership/raw/master/github_assets/6.png" alt="Dark Mode">
 
-<img src="https://github.com/vuejs/art/raw/master/logo.svg" alt="Vue.js logo">
+#
+
+<img src="https://github.com/vuejs/art/raw/master/logo.svg" alt="Vue.js logo" width="100">
