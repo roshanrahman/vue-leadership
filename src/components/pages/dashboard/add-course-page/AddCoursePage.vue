@@ -10,12 +10,12 @@
             <v-form lazy-validation ref="form">
               <v-text-field required label="Course Name" v-model="courseDetails.coursename"></v-text-field>
               <v-text-field required label="Course Code" v-model="courseDetails.coursecode"></v-text-field>
-              <v-text-field
-                required
+              <v-select
+                :items="[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]"
+                v-model.number="courseDetails.regulation"
                 label="Regulation"
-                v-model="courseDetails.regulation"
-                type="number"
-              ></v-text-field>
+                required
+              ></v-select>
               <v-select
                 v-model="courseDetails.facultyId"
                 :items="viewFaculties"
@@ -26,7 +26,7 @@
                 label="Choose faculty"
               ></v-select>
               <v-select
-                :items="viewStudents"
+                :items="filteredStudentList"
                 v-model="studentsList"
                 item-text="registerno"
                 item-value="id"
@@ -49,8 +49,11 @@
               :disabled="courseBtnIsLoading"
               color="primary"
               @click="addCourse"
-            >SUBMIT</v-btn>
+            >ADD</v-btn>
           </v-card-actions>
+          <v-snackbar v-model="snackbar" timeout="3000">Successfully added course.
+            <v-btn flat color="teal" @click="snackbar = false">Got it</v-btn>
+          </v-snackbar>
         </v-card>
       </v-flex>
     </v-layout>
@@ -69,9 +72,11 @@ export default {
     menu: false,
     modal: false,
     menu2: false,
-    viewFaculties: "",
-    viewStudents: "",
+    snackbar: false,
+    viewFaculties: undefined,
+    viewStudents: undefined,
     studentsList: null,
+    adminId: null,
     courseBtnIsLoading: false,
     courseDetails: {
       coursename: null,
@@ -80,11 +85,22 @@ export default {
       facultyId: null
     }
   }),
+  mounted() {
+    this.adminId = JSON.parse(localStorage.session).id;
+  },
+  computed: {
+    filteredStudentList() {
+      const filteredList = this.viewStudents.filter(
+        student => student.year === this.courseDetails.regulation
+      );
+      console.log(filteredList);
+
+      return filteredList;
+    }
+  },
   methods: {
     addCourse() {
       this.courseBtnIsLoading = true;
-      console.log(this.courseDetails);
-      console.log(this.studentsList);
       this.$apollo
         .mutate({
           mutation: gql`
@@ -103,25 +119,38 @@ export default {
                 facultyId: $facultyId
                 studentsId: $studentsId
                 adminId: $adminId
-              )
+              ) {
+                id
+                errors {
+                  message
+                }
+              }
             }
           `,
           variables: {
             coursename: this.courseDetails.coursename,
             coursecode: this.courseDetails.coursecode,
-            regulation: parseInt(this.courseDetails.regulation),
+            regulation: this.courseDetails.regulation,
             facultyId: this.courseDetails.facultyId,
             studentsId: this.studentsList,
-            adminId: "55b21b8a-5378-49ea-b096-c9c9e071681b"
+            adminId: this.adminId
           }
         })
         .then(response => {
           console.log(response.data.addCourse);
+          if (response.data.addCourse.errors) {
+            if (response.data.addCourse.errors[0].errorCode) {
+              alert(response.data.addCourse.errors[0].message);
+            }
+          } else {
+            this.snackbar = true;
+          }
           this.courseBtnIsLoading = false;
           this.$refs.form.reset();
         })
         .catch(err => {
           alert(err);
+          console.log(this.courseDetails);
           this.courseBtnIsLoading = false;
         });
     }
