@@ -1,7 +1,7 @@
 <template>
   <v-app :dark="dark">
     <v-navigation-drawer stateless value="true" v-model="drawer" app>
-      <v-dialog v-model="dialog" width="500">
+      <v-dialog v-model="dialog" width="500" persistent="">
         <v-card color="red darken-4" dark>
           <v-card-title class="title">Connection to server lost
             <v-spacer></v-spacer>

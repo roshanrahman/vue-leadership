@@ -5,6 +5,13 @@
         <v-card-text>
           <h1 class="display-2 font-weight-light">Welcome to CS Entry</h1>
           <br>
+          <!-- <div>
+            <v-card dark color="blue">
+              <v-card-title class="title">Using mobile?</v-card-title>
+              <v-card-text>If you are using this site on your Android, we recommend that you use the Android app for the best mobile experience. Touch this card to download the app.</v-card-text>
+            </v-card>
+            <br>
+          </div>-->
           <p
             style="color: teal"
             class="title"
@@ -26,6 +33,14 @@
               class="title"
             >CS Entry is designed to allow you to store Leadership Board mark entries for your students.</p>
             <p>You can easily add, delete, view and download the entries you make.</p>
+            <p>
+              <strong>
+                We recommend you use CS Entry's Android app on your mobile device. You can download it
+                <a
+                  href="https://drive.google.com/open?id=161uw2XTEcpq-U7fF33_ke8jkZjbL4UaP"
+                >here.</a>
+              </strong>
+            </p>
             <p>Contact the administrator in case of incorrect student, faculty or course data.</p>
           </div>
           <br>

@@ -94,8 +94,15 @@ export default {
         student => student.year === this.courseDetails.regulation
       );
       console.log(filteredList);
-
-      return filteredList;
+      return filteredList.sort(function(a, b) {
+        var nameA = a.registerno.toLowerCase(),
+          nameB = b.registerno.toLowerCase();
+        if (nameA < nameB)
+          //sort string ascending
+          return -1;
+        if (nameA > nameB) return 1;
+        return 0; //default return value (no sorting)
+      });
     }
   },
   methods: {

@@ -32,6 +32,7 @@
                 :rules="countRule"
                 label="Enter the no. of students"
                 type="number"
+                :hint="studentNumberHintString"
                 v-model.number="studentCount"
               ></v-text-field>
             </v-form>
@@ -56,22 +57,31 @@
                   item-text="registerno"
                   item-value="id"
                   v-model="entry.studentId"
+                  :filter="selectStudentFilter"
                 ></v-select>
                 <v-text-field v-model.number="entry.points" label="Enter the score" type="number"></v-text-field>
               </v-card-text>
             </v-card>
           </v-card-text>
           <v-card-actions>
-            <v-btn flat color="red" @click="cancelEntries">CANCEL</v-btn>
+            <v-btn depressed dark color="red" @click="cancelEntries">CANCEL</v-btn>
 
             <v-spacer></v-spacer>
-
-            <v-btn depressed color="primary" @click="submitEntries">CONTINUE</v-btn>
+            <v-btn depressed color="primary" @click="submitEntries">SUBMIT</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
-
+    <v-dialog v-model="dialogEnabled" max-width="500px">
+      <v-card color="red darken-4" dark>
+        <v-card-title class="title">{{ dialogContent.title }}</v-card-title>
+        <v-card-text>{{ dialogContent.content }}</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="white" light flat @click="dialogEnabled = false;">GOT IT</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-snackbar v-model="snackbar" :timeout="5000">Successfully added.
       <v-btn color="teal" flat @click="snackbar = false">Got it</v-btn>
     </v-snackbar>
@@ -92,6 +102,8 @@ export default {
       currentDate: new Date().toISOString().slice(0, 10),
       viewStudents: [],
       viewCourses: [],
+      dialogContent: {},
+      dialogEnabled: false,
       studentCount: null,
       snackbar: false,
       studentEntryList: null,
@@ -108,27 +120,37 @@ export default {
     };
   },
   computed: {
-    entriesId() {
-      //Array of all IDs
-      this.studentEntryList.entry
+    studentNumberHintString() {
+      return "Choose a number less than or equal to the no. of students enrolled in your course.";
     },
     studentListUnderCourse() {
       const course = this.viewCourses.filter(
         course => course.id === this.selectedCourse
       )[0];
       console.log(course);
-      const filteredStudents = 
-      console.log("filteredStudent",filteredStudents)
-      return course.students.filter(({id})=>!this.studentEntryList.find(({studentId})=>studentId===id ) );
+      const filteredStudents = console.log("filteredStudent", filteredStudents);
+      // return course.students.filter(({id})=>!this.studentEntryList.find(({studentId})=>studentId===id ) );
+      return course.students;
     },
     filteredCourseList() {
       const filteredCourses = this.viewCourses.filter(
-        course => course.regulation === this.entry.regulation && course.faculty.id === this.facultyId
+        course =>
+          course.regulation === this.entry.regulation &&
+          course.faculty.id === this.facultyId
       );
       return filteredCourses;
     }
   },
   methods: {
+    customAlert(title, content) {
+      this.dialogContent.title = title;
+      this.dialogContent.content = content;
+      this.dialogEnabled = true;
+    },
+    selectStudentFilter(item, queryText, itemText) {
+      console.log("from methods =======", item, queryText, itemText);
+      return true;
+    },
     cancelEntries() {
       (this.studentCount = null), (this.studentEntryList = null);
       this.showMarkEntries = false;
@@ -137,7 +159,20 @@ export default {
       console.log("FINISHED FIELDS");
       console.log(this.studentEntryList);
       this.showProgressDialog = true;
-
+      for (let i = 0; i < this.studentEntryList.length; i++) {
+        for (let j = i + 1; j < this.studentEntryList.length; j++) {
+          if (
+            this.studentEntryList[i].studentId ===
+            this.studentEntryList[j].studentId
+          ) {
+            this.customAlert(
+              "Duplicate register numbers detected",
+              "You have selected a register number more than once. Please eliminate all duplicates and submit again."
+            );
+            return;
+          }
+        }
+      }
       this.studentEntryList.forEach(entry => {
         this.addRecordMutation(entry);
       });
@@ -197,8 +232,11 @@ export default {
       console.log(this.selectedCourse);
       this.studentEntryList = [];
       if (this.studentCount > this.studentListUnderCourse.length) {
-        alert(
-          "The actual no. of students in your course is lesser than the no. of students you want to enter marks for. Please reduce the no. of students you want to enter marks for."
+        this.customAlert(
+          "Number exceeds no. of students in your course",
+          "You are attempting to enter marks for more students than there are in your course. You can choose up to " +
+            this.studentListUnderCourse.length +
+            ". Please reduce the no. of students you want to enter marks for. "
         );
         return;
       }
