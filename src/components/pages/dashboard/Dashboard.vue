@@ -7,7 +7,7 @@
             <v-spacer></v-spacer>
             <v-progress-circular indeterminate></v-progress-circular>
           </v-card-title>
-          <v-card-text>Some operations will not work unless the connection is restored. You can either wait, or continue working.</v-card-text>
+          <v-card-text><b>We're offline. Please check your internet connection.</b> Some operations will not work unless the connection is restored. You can either wait, or continue working.</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn @click="dialog = false; shown = true;" flat dark>Continue working</v-btn>

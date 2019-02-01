@@ -108,17 +108,22 @@ export default {
     };
   },
   computed: {
+    entriesId() {
+      //Array of all IDs
+      this.studentEntryList.entry
+    },
     studentListUnderCourse() {
       const course = this.viewCourses.filter(
         course => course.id === this.selectedCourse
       )[0];
       console.log(course);
-
-      return course.students;
+      const filteredStudents = 
+      console.log("filteredStudent",filteredStudents)
+      return course.students.filter(({id})=>!this.studentEntryList.find(({studentId})=>studentId===id ) );
     },
     filteredCourseList() {
       const filteredCourses = this.viewCourses.filter(
-        course => course.regulation === this.entry.regulation
+        course => course.regulation === this.entry.regulation && course.faculty.id === this.facultyId
       );
       return filteredCourses;
     }
@@ -237,6 +242,9 @@ export default {
             id
             registerno
             name
+          }
+          faculty {
+            id
           }
         }
       }
