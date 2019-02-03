@@ -16,10 +16,10 @@ A web application for faculty to perform data entry, and for admins to manage da
 
 ### Contributors
 
+- [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)
 - [Sivaram S](https://www.github.com/ThalapathySiva) (Android developer)
 - [Siva Perumal K](https://www.github.com/sivaperumal644) (Android developer)
 - [Roshan G Rahman](https://www.github.com/roshanrahman) (Vue.js developer)
-- [Vineesh V](https://www.github.com/vineeshvk) (Backend/JavaScript developer)
 
 ### Tools and Technologies (for Vue client)
 
