@@ -115,7 +115,7 @@
             </v-list-tile-action>
             <v-list-tile-title>Add Faculty</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile
+          <!-- <v-list-tile
             @click="selectNavItem('add-image')"
             :disabled="currentNavItem === 'add-image'"
           >
@@ -123,7 +123,7 @@
               <v-icon>add_circle</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Add Student Photo</v-list-tile-title>
-          </v-list-tile>
+          </v-list-tile> -->
         </v-list-group>
 
         <v-list-tile @click="logOut()" v-if="isMobile">
