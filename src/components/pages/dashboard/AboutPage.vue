@@ -27,6 +27,9 @@
             You can mail us your feedback
             <a href="mailto:mjolnirssvr@gmail.com">here</a>.
           </p>
+          <br>
+
+          <p class="body-2" title="Egg Puff">Version 0.1.1</p>
         </v-card-text>
       </v-flex>
     </v-layout>

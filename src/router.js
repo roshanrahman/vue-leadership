@@ -13,6 +13,7 @@ import ViewEntries from "./components/pages/dashboard/view-marks/ViewEntries";
 import ViewAllEntries from "./components/pages/dashboard/view-all-marks/ViewAllEntries"
 import About from "./components/pages/dashboard/AboutPage";
 import Home from "./components/pages/dashboard/HomePage";
+import AddImagePage from "./components/pages/dashboard/add-image/AddImagePage"
 Vue.use(Router);
 
 export default new Router({
@@ -32,6 +33,7 @@ export default new Router({
         { path: "/view-faculty", component: ViewFaculty },
         { path: "/view-entries", component: ViewEntries },
         { path: "/view-all-entries", component: ViewAllEntries },
+        {path: "/add-image", component: AddImagePage},
         { path: "/about", component: About }
       ]
     },
