@@ -47,6 +47,15 @@
             </v-list-tile-action>
             <v-list-tile-title>View Entries</v-list-tile-title>
           </v-list-tile>
+          <v-list-tile
+            @click="selectNavItem('star-of-the-week')"
+            :disabled="currentNavItem === 'star-of-the-week'"
+          >
+            <v-list-tile-action>
+              <v-icon>star</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Star Of The Week</v-list-tile-title>
+          </v-list-tile>
         </v-list-group>
         <v-list-group prepend-icon="https" value="true" v-if="isAdmin()">
           <v-list-tile slot="activator">
@@ -60,6 +69,15 @@
               <v-icon>star</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>View Leadership Board Entries</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile
+            @click="selectNavItem('star-of-the-week')"
+            :disabled="currentNavItem === 'star-of-the-week'"
+          >
+            <v-list-tile-action>
+              <v-icon>star</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Star Of The Week</v-list-tile-title>
           </v-list-tile>
           <v-list-tile
             @click="selectNavItem('view-students')"
@@ -123,7 +141,7 @@
               <v-icon>add_circle</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Add Student Photo</v-list-tile-title>
-          </v-list-tile> -->
+          </v-list-tile>-->
         </v-list-group>
 
         <v-list-tile @click="logOut()" v-if="isMobile">
@@ -298,6 +316,11 @@ export default {
         case "view-all-entries": {
           this.$router.push("view-all-entries");
           this.currentNavItem = "view-all-entries";
+          break;
+        }
+        case "star-of-the-week": {
+          this.$router.push("star-of-the-week");
+          this.currentNavItem = "star-of-the-week";
           break;
         }
         case "about": {

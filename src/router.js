@@ -10,10 +10,11 @@ import ViewCourses from "./components/pages/dashboard/view-courses/ViewCourses";
 import ViewFaculty from "./components/pages/dashboard/view-faculty/ViewFaculty";
 import ViewStudents from "./components/pages/dashboard/view-students/ViewStudents";
 import ViewEntries from "./components/pages/dashboard/view-marks/ViewEntries";
-import ViewAllEntries from "./components/pages/dashboard/view-all-marks/ViewAllEntries"
+import ViewAllEntries from "./components/pages/dashboard/view-all-marks/ViewAllEntries";
 import About from "./components/pages/dashboard/AboutPage";
 import Home from "./components/pages/dashboard/HomePage";
-import AddImagePage from "./components/pages/dashboard/add-image/AddImagePage"
+import AddImagePage from "./components/pages/dashboard/add-image/AddImagePage";
+import StarOfTheWeek from "./components/pages/dashboard/star-of-the-week/StarOfTheWeek";
 Vue.use(Router);
 
 export default new Router({
@@ -33,7 +34,8 @@ export default new Router({
         { path: "/view-faculty", component: ViewFaculty },
         { path: "/view-entries", component: ViewEntries },
         { path: "/view-all-entries", component: ViewAllEntries },
-        {path: "/add-image", component: AddImagePage},
+        { path: "/star-of-the-week", component: StarOfTheWeek },
+        { path: "/add-image", component: AddImagePage },
         { path: "/about", component: About }
       ]
     },

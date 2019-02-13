@@ -21,7 +21,13 @@
             ></v-text-field>
           </v-card-title>
           <v-card-text>
-            <v-data-table :search="search" hide-actions :headers="headers" :items="filteredRecords">
+            <v-data-table
+              class="elevation-1"
+              :search="search"
+              hide-actions
+              :headers="headers"
+              :items="filteredRecords"
+            >
               <template slot="items" slot-scope="props">
                 <td>{{ props.item.date }}</td>
                 <td>{{ props.item.course.coursecode }}</td>
