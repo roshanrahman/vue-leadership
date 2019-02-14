@@ -122,13 +122,18 @@ export default {
     },
     onDownloadClicked() {
       this.loading = true;
-      console.log(this.startDate, this.endDate, this.regulation, this.section);
-      if (this.calculateStarOfWeek) {
-        this.download("star_of_the_week.pdf", this.calculateStarOfWeek.pdf);
+      console.log(this.calculateStarOfWeek);
+      if (this.calculateStarOfWeek.errors) {
+        alert(
+          "The server responded with error: " +
+            this.calculateStarOfWeek.errors[0].message
+        );
       } else {
-        alert("An error occured. Make sure the details are entered.");
-        this.loading = false;
+        if (this.calculateStarOfWeek.pdf) {
+          this.download("star_of_the_week.pdf", this.calculateStarOfWeek.pdf);
+        }
       }
+      this.loading = false;
     }
   },
   apollo: {
@@ -147,6 +152,9 @@ export default {
             section: $section
           ) {
             pdf
+            errors {
+              message
+            }
           }
         }
       `,

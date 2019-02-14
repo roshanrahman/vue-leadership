@@ -32,7 +32,7 @@
             <p
               class="title"
             >CS Entry is designed to allow you to store Leadership Board mark entries for your students.</p>
-            <p>You can easily add, delete, view and download the entries you make.</p>
+            <p>You can easily add, delete, view and download the entries you make, and generate Star Of The Week report automatically for your class.</p>
             <p>
               <strong>
                 We recommend you use CS Entry's Android app on your mobile device. You can download it
