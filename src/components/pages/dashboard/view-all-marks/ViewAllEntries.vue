@@ -35,6 +35,9 @@
                 <td>{{ props.item.student.registerno }}</td>
                 <td>{{ props.item.student.name }}</td>
                 <td>{{ props.item.points }}</td>
+                <td>
+                  <v-icon color="red" @click="showDeleteRecordDialog(props.item)">delete</v-icon>
+                </td>
               </template>
             </v-data-table>
           </v-card-text>
@@ -110,6 +113,10 @@ export default {
         {
           text: "Marks awarded",
           value: "points"
+        },
+        {
+          text: "Delete",
+          sortable: false
         }
       ],
       viewRecords: { records: [] },
@@ -146,6 +153,7 @@ export default {
     showDeleteRecordDialog(Record) {
       this.viewDeleteRecordDialogContent = Record;
       this.viewDeleteRecordDialog = true;
+      console.log("Selected record", Record);
     },
     deleteRecord(inputRecordId) {
       console.log("Deleted " + inputRecordId);
@@ -153,13 +161,8 @@ export default {
       this.$apollo
         .mutate({
           mutation: gql`
-            mutation DeleteRecord($recordId: String!, $adminId: String!) {
-              deleteRecord(recordId: $recordId, adminId: $adminId) {
-                id
-                errors {
-                  message
-                }
-              }
+            mutation DeleteRecords($recordId: String!, $adminId: String!) {
+              deleteRecords(recordId: $recordId, adminId: $adminId)
             }
           `,
           variables: {
@@ -183,6 +186,7 @@ export default {
       query ViewRecords {
         viewRecords {
           records {
+            id
             student {
               name
               registerno
