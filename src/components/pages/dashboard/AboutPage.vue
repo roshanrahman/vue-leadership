@@ -29,7 +29,7 @@
           </p>
           <br>
 
-          <p class="body-2" title="Egg Puff">Version 0.1.1</p>
+          <p class="body-2" title="Veg Puff">Version 0.1.2/p></p>
         </v-card-text>
       </v-flex>
     </v-layout>
