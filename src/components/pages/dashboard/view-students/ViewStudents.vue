@@ -315,7 +315,6 @@ export default {
           id
           name
           registerno
-          image
           dob
           section
           year
