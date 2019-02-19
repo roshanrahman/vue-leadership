@@ -25,9 +25,12 @@
               class="elevation-1"
               :search="search"
               hide-actions
+              :loading="!filteredRecords[0]"
               :headers="headers"
               :items="filteredRecords"
             >
+              <v-progress-linear slot="progress" color="teal" indeterminate></v-progress-linear>
+
               <template slot="items" slot-scope="props">
                 <td>{{ props.item.date }}</td>
                 <td>{{ props.item.course.coursecode }}</td>

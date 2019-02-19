@@ -15,7 +15,15 @@
             ></v-text-field>
           </v-card-title>
           <v-card-text>
-            <v-data-table :search="search" hide-actions :headers="headers" :items="viewFaculties">
+            <v-data-table
+              :loading="viewFaculties[0]"
+              :search="search"
+              hide-actions
+              :headers="headers"
+              :items="viewFaculties"
+            >
+              <v-progress-linear slot="progress" color="teal" indeterminate></v-progress-linear>
+
               <template slot="items" slot-scope="props">
                 <td>{{ props.item.name }}</td>
                 <td>{{ props.item.username }}</td>

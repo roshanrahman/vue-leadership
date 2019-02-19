@@ -15,7 +15,15 @@
             ></v-text-field>
           </v-card-title>
           <v-card-text>
-            <v-data-table :search="search" hide-actions :headers="headers" :items="viewStudents">
+            <v-data-table
+              :loading="!viewStudents[0]"
+              :search="search"
+              hide-actions
+              :headers="headers"
+              :items="viewStudents"
+            >
+              <v-progress-linear slot="progress" color="teal" indeterminate></v-progress-linear>
+
               <template slot="items" slot-scope="props">
                 <td>{{ props.item.registerno }}</td>
                 <td>{{ props.item.name }}</td>
@@ -37,6 +45,14 @@
                     color="grey"
                     @click="showImageDialog(props.item)"
                   >add_a_photo</v-icon>
+                </td>
+                <td>
+                  <v-icon
+                    title="Edit details"
+                    flat
+                    color="grey"
+                    @click="showEditStudentDialog(props.item)"
+                  >edit</v-icon>
                 </td>
               </template>
             </v-data-table>
@@ -102,6 +118,50 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="viewEditStudentDialog" scrollable max-width="700px">
+      <v-card>
+        <v-card-title class="title">Edit details for {{ this.viewEditStudentDialogContent.name }}</v-card-title>
+        <v-card-text>
+          <v-list>
+            <v-list-tile>
+              <v-list-tile-title>Register No.</v-list-tile-title>
+              <v-list-tile-sub-title>
+                <v-text-field v-model="this.viewEditStudentDialogContent.registerno"></v-text-field>
+              </v-list-tile-sub-title>
+            </v-list-tile>
+            <v-list-tile>
+              <v-list-tile-title>Name</v-list-tile-title>
+              <v-list-tile-sub-title>
+                <v-text-field v-model="this.viewEditStudentDialogContent.name"></v-text-field>
+              </v-list-tile-sub-title>
+            </v-list-tile>
+            <v-list-tile>
+              <v-list-tile-title>DOB</v-list-tile-title>
+              <v-list-tile-sub-title>
+                <v-text-field v-model="this.viewEditStudentDialogContent.dob"></v-text-field>
+              </v-list-tile-sub-title>
+            </v-list-tile>
+            <v-list-tile>
+              <v-list-tile-title>Year/Regulation</v-list-tile-title>
+              <v-list-tile-sub-title>
+                <v-text-field v-model.number="this.viewEditStudentDialogContent.year"></v-text-field>
+              </v-list-tile-sub-title>
+            </v-list-tile>
+            <v-list-tile>
+              <v-list-tile-title>Section</v-list-tile-title>
+              <v-list-tile-sub-title>
+                <v-text-field v-model="this.viewEditStudentDialogContent.section"></v-text-field>
+              </v-list-tile-sub-title>
+            </v-list-tile>
+          </v-list>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn light outline @click="viewEditStudentDialog = false">CANCEL</v-btn>
+          <v-btn light flat @click="viewEditStudentDialog = false; editStudent()">SAVE</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-snackbar v-model="snackbar" timeout="3000">Successfully saved changes to database.
       <v-btn color="teal" flat @click="snackbar = false">Got it</v-btn>
     </v-snackbar>
@@ -118,6 +178,8 @@ export default {
       snackbar: false,
       viewDeleteStudentDialog: false,
       viewImageDialog: false,
+      viewEditStudentDialog: false,
+      viewEditStudentDialogContent: [],
       viewDeleteStudentDialogContent: [],
       viewImageDialogContent: [],
       headers: [
@@ -150,9 +212,15 @@ export default {
           text: "Photo",
           value: "photo",
           sortable: false
+        },
+        {
+          text: "Edit",
+          value: "edit",
+          sortable: false
         }
       ],
-      viewStudents: []
+      viewStudents: [],
+      getStudentImage: ""
     };
   },
   mounted() {
@@ -161,6 +229,68 @@ export default {
     this.$apollo.queries.viewStudents.refetch();
   },
   methods: {
+    showEditStudentDialog(student) {
+      this.viewEditStudentDialog = true;
+      this.viewEditStudentDialogContent = student;
+    },
+    editStudent() {
+      console.log(this.viewImageDialogContent);
+      this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation EditStudent(
+              $adminId: String!
+              $studentId: String!
+              $registerno: String
+              $name: String
+              $dob: String
+              $year: Int
+              $section: String
+            ) {
+              editStudent(
+                adminId: $adminId
+                studentId: $studentId
+                registerno: $registerno
+                name: $name
+                dob: $dob
+                year: $year
+                section: $section
+              ) {
+                id
+                errors {
+                  message
+                }
+              }
+            }
+          `,
+          variables: {
+            studentId: this.viewEditStudentDialogContent.id,
+            adminId: this.adminId,
+            registerno: this.viewEditStudentDialogContent.registerno,
+            name: this.viewEditStudentDialogContent.name,
+            dob: this.viewEditStudentDialogContent.dob,
+            year: this.viewEditStudentDialogContent.year,
+            section: this.viewEditStudentDialogContent.section
+          }
+        })
+        .then(response => {
+          console.log("RESPONSE FROM EDIT");
+          console.log(response);
+          if (response.data.editStudent.errors) {
+            alert(
+              "An error occurred: " +
+                response.data.editStudent.errors[0].message
+            );
+            return;
+          }
+          this.viewEditStudentDialog = false;
+          this.snackbar = true;
+          this.$apollo.queries.viewStudents.refetch();
+        })
+        .catch(err => {
+          alert(err);
+        });
+    },
     resizedataURL(datas, wantedWidth, wantedHeight) {
       return new Promise(async function(resolve, reject) {
         // We create an image to receive the Data URI
@@ -220,7 +350,10 @@ export default {
       this.viewDeleteStudentDialog = true;
     },
     showImageDialog(Student) {
+      this.currentStudentId = Student.id;
       this.viewImageDialogContent = Student;
+      this.viewImageDialogContent.image = this.getStudentImage;
+      console.log("Get image", this.getStudentImage);
       this.viewImageDialog = true;
     },
     uploadImage() {
@@ -320,7 +453,21 @@ export default {
           year
         }
       }
-    `
+    `,
+    getStudentImage: {
+      query: gql`
+        query GetStudentImage($studentId: String!) {
+          getStudentImage(studentId: $studentId)
+        }
+      `,
+      variables() {
+        console.log("from query variable", this.currentStudentId);
+
+        return {
+          studentId: this.currentStudentId
+        };
+      }
+    }
   }
 };
 </script>
