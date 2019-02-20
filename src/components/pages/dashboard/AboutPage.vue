@@ -29,7 +29,7 @@
           </p>
           <br>
 
-          <p class="body-2" title="Veg Puff">Version 0.1.2/p></p>
+          <p class="body-2" title="Paneer Butter Masala">Version 0.1.3/p></p>
         </v-card-text>
       </v-flex>
     </v-layout>

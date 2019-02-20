@@ -354,6 +354,7 @@ export default {
       this.viewImageDialogContent = Student;
       this.viewImageDialogContent.image = this.getStudentImage;
       console.log("Get image", this.getStudentImage);
+      this.$apollo.queries.getStudentImage.refetch();
       this.viewImageDialog = true;
     },
     uploadImage() {

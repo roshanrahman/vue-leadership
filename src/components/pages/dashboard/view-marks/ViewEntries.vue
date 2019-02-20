@@ -22,7 +22,7 @@
           </v-card-title>
           <v-card-text>
             <v-data-table
-              :loading="filteredRecords[0]"
+              :loading="!filteredRecords[0]"
               :search="search"
               hide-actions
               :headers="headers"

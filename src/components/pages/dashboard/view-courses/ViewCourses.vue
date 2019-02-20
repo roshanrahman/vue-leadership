@@ -16,7 +16,7 @@
           </v-card-title>
           <v-card-text>
             <v-data-table
-              :loading="viewCourses[0]"
+              :loading="!viewCourses[0]"
               :search="search"
               hide-actions
               :headers="headers"
