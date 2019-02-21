@@ -126,31 +126,31 @@
             <v-list-tile>
               <v-list-tile-title>Register No.</v-list-tile-title>
               <v-list-tile-sub-title>
-                <v-text-field v-model="this.viewEditStudentDialogContent.registerno"></v-text-field>
+                <v-text-field :value="this.viewEditStudentDialogContent.registerno" id="registerno"></v-text-field>
               </v-list-tile-sub-title>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-title>Name</v-list-tile-title>
               <v-list-tile-sub-title>
-                <v-text-field v-model="this.viewEditStudentDialogContent.name"></v-text-field>
+                <v-text-field :value="this.viewEditStudentDialogContent.name" id="name"></v-text-field>
               </v-list-tile-sub-title>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-title>DOB</v-list-tile-title>
               <v-list-tile-sub-title>
-                <v-text-field v-model="this.viewEditStudentDialogContent.dob"></v-text-field>
+                <v-text-field :value="this.viewEditStudentDialogContent.dob" id="dob"></v-text-field>
               </v-list-tile-sub-title>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-title>Year/Regulation</v-list-tile-title>
               <v-list-tile-sub-title>
-                <v-text-field v-model.number="this.viewEditStudentDialogContent.year"></v-text-field>
+                <v-text-field :value="this.viewEditStudentDialogContent.year" id="year"></v-text-field>
               </v-list-tile-sub-title>
             </v-list-tile>
             <v-list-tile>
               <v-list-tile-title>Section</v-list-tile-title>
               <v-list-tile-sub-title>
-                <v-text-field v-model="this.viewEditStudentDialogContent.section"></v-text-field>
+                <v-text-field :value="this.viewEditStudentDialogContent.section" id="section"></v-text-field>
               </v-list-tile-sub-title>
             </v-list-tile>
           </v-list>
@@ -179,7 +179,7 @@ export default {
       viewDeleteStudentDialog: false,
       viewImageDialog: false,
       viewEditStudentDialog: false,
-      viewEditStudentDialogContent: [],
+      viewEditStudentDialogContent: {},
       viewDeleteStudentDialogContent: [],
       viewImageDialogContent: [],
       headers: [
@@ -234,7 +234,21 @@ export default {
       this.viewEditStudentDialogContent = student;
     },
     editStudent() {
-      console.log(this.viewImageDialogContent);
+      this.viewEditStudentDialogContent.registerno = document.querySelector(
+        "#registerno"
+      ).value;
+      this.viewEditStudentDialogContent.name = document.querySelector(
+        "#name"
+      ).value;
+      this.viewEditStudentDialogContent.dob = document.querySelector(
+        "#dob"
+      ).value;
+      this.viewEditStudentDialogContent.year = Number(
+        document.querySelector("#year").value
+      );
+      this.viewEditStudentDialogContent.section = document.querySelector(
+        "#section"
+      ).value;
       this.$apollo
         .mutate({
           mutation: gql`
@@ -274,8 +288,8 @@ export default {
           }
         })
         .then(response => {
-          console.log("RESPONSE FROM EDIT");
-          console.log(response);
+          console.log("SENT THESE SERVERS", this.viewEditStudentDialogContent);
+          console.log("RESPONSE FROM EDIT", response);
           if (response.data.editStudent.errors) {
             alert(
               "An error occurred: " +
