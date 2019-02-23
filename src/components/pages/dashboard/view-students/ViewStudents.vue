@@ -19,6 +19,7 @@
               :loading="!viewStudents[0]"
               :search="search"
               hide-actions
+              class="elevation-1"
               :headers="headers"
               :items="viewStudents"
             >

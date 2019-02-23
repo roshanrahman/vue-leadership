@@ -34,21 +34,39 @@
             >CS Entry is designed to allow you to store Leadership Board mark entries for your students.</p>
             <p>You can easily add, delete, view and download the entries you make, and generate Star Of The Week report automatically for your class.</p>
             <p>
-              <strong>
-                We recommend you use CS Entry's Android app on your mobile device. You can download it
-                <a
-                  href="https://drive.google.com/open?id=161uw2XTEcpq-U7fF33_ke8jkZjbL4UaP"
-                >here.</a>
-              </strong>
+              <a
+                href="https://drive.google.com/open?id=161uw2XTEcpq-U7fF33_ke8jkZjbL4UaP"
+                style="text-decoration: none;"
+              >
+                <v-alert
+                  value="true"
+                  type="info"
+                  color="primary"
+                  outline
+                  transition="scale-transition"
+                >We recommend you use CS Entry's Android app on your mobile device. You can download it by clicking here.</v-alert>
+              </a>
             </p>
             <p>Contact the administrator in case of incorrect student, faculty or course data.</p>
           </div>
           <br>
+
           <p class="body-2">
             You can mail us your feedback
             <a href="mailto:mjolnirssvr@gmail.com">here</a>.
           </p>
         </v-card-text>
+
+        <v-footer color="transparent">
+          <a
+            href="https://github.com/roshanrahman/vue-leadership/raw/master/github_assets/cs-entry-manual.pdf"
+            style="text-decoration: none;"
+          >
+            <v-btn round color="primary" outline dark>
+              <v-icon left dark>help</v-icon>GET HELP (PDF)
+            </v-btn>
+          </a>
+        </v-footer>
       </v-flex>
     </v-layout>
   </v-container>

@@ -18,6 +18,7 @@
             <v-data-table
               :loading="!viewCourses[0]"
               :search="search"
+              class="elevation-1"
               hide-actions
               :headers="headers"
               :items="viewCourses"
@@ -31,7 +32,13 @@
                 <td>{{ props.item.faculty.name }}</td>
                 <td>
                   {{ props.item.students.length }} students
-                  <v-btn small round flat @click="viewStudentsForCourse(props.item)">VIEW</v-btn>
+                  <v-btn
+                    small
+                    round
+                    flat
+                    color="primary"
+                    @click="viewStudentsForCourse(props.item)"
+                  >VIEW</v-btn>
                 </td>
                 <td>
                   <v-icon

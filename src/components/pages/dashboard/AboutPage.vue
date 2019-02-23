@@ -13,7 +13,7 @@
           <br>
           <h3>Developed By</h3>
           <br>
-          <img src="../../../assets/team.svg" alt="Team logo">
+          <img src="../../../assets/team.svg" alt="Team logo" title="Team 404Found">
           <br>
           <b>
             <p>The students of BE/CSE 2016-2020</p>
@@ -29,7 +29,21 @@
           </p>
           <br>
 
-          <p class="body-2" title="Paneer Butter Masala">Version 0.1.3/p></p>
+          <p class="body-2" title="Egg Puffs">Version 0.2.0</p>
+          <br>
+          <div>
+            Icons made by
+            <a
+              href="https://www.flaticon.com/authors/epiccoders"
+              title="EpicCoders"
+            >EpicCoders</a> from
+            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
+            <a
+              href="http://creativecommons.org/licenses/by/3.0/"
+              title="Creative Commons BY 3.0"
+              target="_blank"
+            >CC 3.0 BY</a>
+          </div>
         </v-card-text>
       </v-flex>
     </v-layout>

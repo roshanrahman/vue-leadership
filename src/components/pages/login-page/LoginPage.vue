@@ -159,6 +159,7 @@ export default {
                 id
                 name
                 username
+                accountType
                 errors {
                   message
                   errorCode
@@ -188,6 +189,7 @@ export default {
             this.$parent.updateLocalStorage({
               id: response.data.facultyLogin.id,
               name: response.data.facultyLogin.name,
+              accountType: response.data.facultyLogin.accountType,
               username: response.data.facultyLogin.username,
               isAdmin: this.isAdminLogin
             });

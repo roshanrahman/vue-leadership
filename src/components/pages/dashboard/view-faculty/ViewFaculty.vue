@@ -19,6 +19,7 @@
               :loading="!viewFaculties[0]"
               :search="search"
               hide-actions
+              class="elevation-1"
               :headers="headers"
               :items="viewFaculties"
             >
@@ -34,6 +35,14 @@
                     color="red accent-4"
                     @click="showDeleteFacultyDialog(props.item)"
                   >delete</v-icon>
+                </td>
+                <td>
+                  <v-icon
+                    title="Edit this faculty"
+                    flat
+                    color="grey"
+                    @click="showEditFacultyDialog(props.item)"
+                  >edit</v-icon>
                 </td>
               </template>
             </v-data-table>
@@ -57,7 +66,44 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-snackbar v-model="snackbar" timeout="3000">Successfully deleted faculty.
+    <v-dialog v-model="viewEditFacultyDialog" scrollable max-width="700px">
+      <v-card>
+        <v-card-title class="title">Edit details for {{ this.viewEditFacultyDialogContent.name }}</v-card-title>
+        <v-card-text>
+          <v-list>
+            <v-list-tile>
+              <v-list-tile-title>Name</v-list-tile-title>
+              <v-list-tile-sub-title>
+                <v-text-field :value="this.viewEditFacultyDialogContent.name" id="name"></v-text-field>
+              </v-list-tile-sub-title>
+            </v-list-tile>
+            <v-list-tile>
+              <v-list-tile-title>Username</v-list-tile-title>
+              <v-list-tile-sub-title>
+                <v-text-field :value="this.viewEditFacultyDialogContent.username" id="username"></v-text-field>
+              </v-list-tile-sub-title>
+            </v-list-tile>
+            <v-list-tile>
+              <v-list-tile-title>Password</v-list-tile-title>
+              <v-list-tile-sub-title>
+                <v-text-field
+                  :value="this.viewEditFacultyDialogContent.password"
+                  persistent-hint
+                  hint="Enter a new password here to replace the current one"
+                  id="password"
+                ></v-text-field>
+              </v-list-tile-sub-title>
+            </v-list-tile>
+          </v-list>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn light outline @click="viewEditFacultyDialog = false">CANCEL</v-btn>
+          <v-btn light flat @click="viewEditFacultyDialog = false; editFaculty()">SAVE</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-snackbar v-model="snackbar" timeout="3000">Successfully updated database.
       <v-btn color="teal" flat @click="snackbar = false">Got it</v-btn>
     </v-snackbar>
   </v-container>
@@ -71,6 +117,8 @@ export default {
       search: null,
       adminId: null,
       snackbar: false,
+      viewEditFacultyDialog: false,
+      viewEditFacultyDialogContent: {},
       viewDeleteFacultyDialog: false,
       viewDeleteFacultyDialogContent: [],
       headers: [
@@ -86,6 +134,10 @@ export default {
           text: "Actions",
           value: "actions",
           sortable: false
+        },
+        {
+          text: "Edit",
+          sortable: false
         }
       ],
       viewFaculties: []
@@ -97,6 +149,70 @@ export default {
     this.$apollo.queries.viewFaculties.refetch();
   },
   methods: {
+    showEditFacultyDialog(student) {
+      this.viewEditFacultyDialog = true;
+      this.viewEditFacultyDialogContent = student;
+    },
+    editFaculty() {
+      this.viewEditFacultyDialogContent.name = document.querySelector(
+        "#name"
+      ).value;
+      this.viewEditFacultyDialogContent.username = document.querySelector(
+        "#username"
+      ).value;
+      this.viewEditFacultyDialogContent.password = document.querySelector(
+        "#password"
+      ).value;
+      this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation EditFaculty(
+              $adminId: String!
+              $facultyId: String!
+              $password: String
+              $username: String
+              $name: String
+            ) {
+              editFaculty(
+                adminId: $adminId
+                facultyId: $facultyId
+                password: $password
+                username: $username
+                name: $name
+              ) {
+                id
+                errors {
+                  message
+                }
+              }
+            }
+          `,
+          variables: {
+            facultyId: this.viewEditFacultyDialogContent.id,
+            adminId: this.adminId,
+            password: this.viewEditFacultyDialogContent.password,
+            username: this.viewEditFacultyDialogContent.username,
+            name: this.viewEditFacultyDialogContent.name
+          }
+        })
+        .then(response => {
+          console.log("SENT THESE SERVERS", this.viewEditFacultyDialogContent);
+          console.log("RESPONSE FROM EDIT", response);
+          if (response.data.editFaculty.errors) {
+            alert(
+              "An error occurred: " +
+                response.data.editFaculty.errors[0].message
+            );
+            return;
+          }
+          this.viewEditFacultyDialog = false;
+          this.snackbar = true;
+          this.$apollo.queries.viewFaculties.refetch();
+        })
+        .catch(err => {
+          alert(err);
+        });
+    },
     showDeleteFacultyDialog(faculty) {
       this.viewDeleteFacultyDialogContent = faculty;
       this.viewDeleteFacultyDialog = true;

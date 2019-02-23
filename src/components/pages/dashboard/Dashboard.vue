@@ -48,6 +48,15 @@
             <v-list-tile-title>View Entries</v-list-tile-title>
           </v-list-tile>
           <v-list-tile
+            @click="selectNavItem('view-total-marks')"
+            :disabled="currentNavItem === 'view-total-marks'"
+          >
+            <v-list-tile-action>
+              <v-icon>visibility</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>View Total Marks</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile
             @click="selectNavItem('star-of-the-week')"
             :disabled="currentNavItem === 'star-of-the-week'"
           >
@@ -69,6 +78,15 @@
               <v-icon>star</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>View Leadership Board Entries</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile
+            @click="selectNavItem('view-total-marks')"
+            :disabled="currentNavItem === 'view-total-marks'"
+          >
+            <v-list-tile-action>
+              <v-icon>visibility</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>View Total Marks</v-list-tile-title>
           </v-list-tile>
           <v-list-tile
             @click="selectNavItem('star-of-the-week')"
@@ -311,6 +329,11 @@ export default {
         case "view-entries": {
           this.$router.push("view-entries");
           this.currentNavItem = "view-entries";
+          break;
+        }
+        case "view-total-marks": {
+          this.$router.push("view-total-marks");
+          this.currentNavItem = "view-total-marks";
           break;
         }
         case "view-all-entries": {
