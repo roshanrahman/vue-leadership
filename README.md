@@ -6,9 +6,9 @@
 
 ### Components
 
+- [_GraphQL/Postgres based TypeScript server_](https://github.com/vineeshvk/Leadership-Board-Backend)
 - [_Android client_](https://github.com/ThalapathySiva/LeadershipBoard)
 - _Vue.js based web client_ (You're here)
-- [_GraphQL/Postgres based TypeScript server_](https://github.com/vineeshvk/Leadership-Board-Backend)
 
 ### Vue.js web panel for Faculty and Administrator
 
