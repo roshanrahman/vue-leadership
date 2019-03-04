@@ -72,7 +72,7 @@ export default {
           value: "dob"
         },
         {
-          text: "Regulation",
+          text: "Batch",
           value: "year"
         },
         {
@@ -81,7 +81,7 @@ export default {
         },
         {
           text: "Total marks scored",
-          value: "totalMarks"
+          value: "totalMarks.totalMarks"
         }
       ],
       viewRecords: { records: [] },

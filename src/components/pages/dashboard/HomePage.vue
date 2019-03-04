@@ -35,7 +35,7 @@
             <p>You can easily add, delete, view and download the entries you make, and generate Star Of The Week report automatically for your class.</p>
             <p>
               <a
-                href="https://drive.google.com/open?id=161uw2XTEcpq-U7fF33_ke8jkZjbL4UaP"
+                href="https://drive.google.com/open?id=15fvei82t0cy7V9614-lKUOlSOP2NQir5"
                 style="text-decoration: none;"
               >
                 <v-alert

@@ -20,7 +20,7 @@
               <v-select
                 :items="[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]"
                 v-model.number="studentDetails.year"
-                label="Regulation"
+                label="Batch"
                 required
               ></v-select>
               <v-select
