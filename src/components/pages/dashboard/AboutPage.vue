@@ -29,7 +29,7 @@
           </p>
           <br>
 
-          <p class="body-2" title="Egg Puffs">Version 0.2.0</p>
+          <p class="body-2" title="Egg Puffs">Version 0.2.2</p>
           <br>
           <div>
             Icons made by

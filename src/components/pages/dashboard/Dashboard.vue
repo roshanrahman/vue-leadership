@@ -65,6 +65,15 @@
             </v-list-tile-action>
             <v-list-tile-title>Star Of The Week</v-list-tile-title>
           </v-list-tile>
+          <v-list-tile
+            @click="selectNavItem('download-consolidate')"
+            :disabled="currentNavItem === 'download-consolidate'"
+          >
+            <v-list-tile-action>
+              <v-icon>file_copy</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Consolidated Marksheet</v-list-tile-title>
+          </v-list-tile>
         </v-list-group>
         <v-list-group prepend-icon="https" value="true" v-if="isAdmin()">
           <v-list-tile slot="activator">
@@ -96,6 +105,15 @@
               <v-icon>star</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Star Of The Week</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile
+            @click="selectNavItem('download-consolidate')"
+            :disabled="currentNavItem === 'download-consolidate'"
+          >
+            <v-list-tile-action>
+              <v-icon>file_copy</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Consolidated Marksheet</v-list-tile-title>
           </v-list-tile>
           <v-list-tile
             @click="selectNavItem('view-students')"
@@ -238,7 +256,11 @@ export default {
           this.dialog = false;
           this.shown = false;
         }
-        console.log(this.test);
+        console.log(
+          this.test
+            ? "Regular ping to server: SERVER IS CONNECTED"
+            : "Regular ping to server: FAILED TO GET RESPONSE FROM SERVER"
+        );
       }, 3000);
     });
   },
@@ -344,6 +366,11 @@ export default {
         case "star-of-the-week": {
           this.$router.push("star-of-the-week");
           this.currentNavItem = "star-of-the-week";
+          break;
+        }
+        case "download-consolidate": {
+          this.$router.push("download-consolidate");
+          this.currentNavItem = "download-consolidate";
           break;
         }
         case "about": {

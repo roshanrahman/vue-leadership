@@ -16,6 +16,7 @@ import Home from "./components/pages/dashboard/HomePage";
 import AddImagePage from "./components/pages/dashboard/add-image/AddImagePage";
 import StarOfTheWeek from "./components/pages/dashboard/star-of-the-week/StarOfTheWeek";
 import ViewTotalMarks from "./components/pages/dashboard/view-total-marks/ViewTotalMarks";
+import DownloadConsolidated from "./components/pages/dashboard/download-consolidated/DownloadConsolidated";
 Vue.use(Router);
 
 export default new Router({
@@ -35,7 +36,8 @@ export default new Router({
         { path: "/view-faculty", component: ViewFaculty },
         { path: "/view-entries", component: ViewEntries },
         { path: "/view-all-entries", component: ViewAllEntries },
-        { path: "/view-total-marks", component: ViewTotalMarks},
+        { path: "/view-total-marks", component: ViewTotalMarks },
+        { path: "/download-consolidate", component: DownloadConsolidated },
         { path: "/star-of-the-week", component: StarOfTheWeek },
         { path: "/add-image", component: AddImagePage },
         { path: "/about", component: About }

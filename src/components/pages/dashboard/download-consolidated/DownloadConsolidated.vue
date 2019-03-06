@@ -4,12 +4,14 @@
       <v-flex xs10 offset-xs1>
         <v-card>
           <v-card-title primary-title>
-            <h3 class="headline">Star Of The Week</h3>
+            <h3 class="headline">Consolidated Marksheet</h3>
             <v-spacer></v-spacer>
           </v-card-title>
 
           <v-card-text>
-            <p class="title">Enter the following details to download the Star Of The Week PDF</p>
+            <p
+              class="title"
+            >Enter the following details to download consolidated marksheet for any class</p>
 
             <v-menu
               v-model="showStartDate"
@@ -25,7 +27,7 @@
                 slot="activator"
                 v-model="startDate"
                 label="Starting date"
-                hint="Enter the date to start the week from"
+                hint="Enter the date to start the range"
                 persistent-hint
                 prepend-icon="event"
                 readonly
@@ -48,7 +50,7 @@
                 slot="activator"
                 v-model="endDate"
                 label="Ending date"
-                hint="Enter the date to mark the end of week"
+                hint="Enter the date to mark the end of the range"
                 persistent-hint
                 prepend-icon="event"
                 readonly
@@ -64,14 +66,14 @@
             ></v-select>
             <v-select v-model="section" :items="['A', 'B', 'C']" label="Section" solo></v-select>
             <v-btn color="primary" :loading="loading" @click="onDownloadClicked">
-              <v-icon style="padding-right:8px;">cloud_download</v-icon>Download PDF
+              <v-icon style="padding-right:8px;">cloud_download</v-icon>Download Marksheet CSV
             </v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
 
-    <v-snackbar v-model="snackbar" timeout="3000">Successfully deleted Record.
+    <v-snackbar v-model="snackbar" timeout="3000">Downloaded. Check your downloads.
       <v-btn color="teal" flat @click="snackbar = false">Got it</v-btn>
     </v-snackbar>
   </v-container>
@@ -91,7 +93,7 @@ export default {
       section: "",
       showStartDate: false,
       showEndDate: false,
-      calculateStarOfWeek: null,
+      getConsolidateMarks: null,
       snackbar: false
     };
   },
@@ -101,14 +103,13 @@ export default {
     this.session = JSON.parse(localStorage.session);
     this.adminId = JSON.parse(localStorage.session).id;
     console.log("USER ID" + this.adminId);
-    this.$apollo.queries.viewRecords.refetch();
   },
   methods: {
     download(filename, text) {
       var element = document.createElement("a");
       element.setAttribute(
         "href",
-        "data:application/pdf;base64," + encodeURIComponent(text)
+        "data:text/plain;charset=utf-8," + encodeURIComponent(text)
       );
       element.setAttribute("download", filename);
 
@@ -122,40 +123,26 @@ export default {
     },
     onDownloadClicked() {
       this.loading = true;
-      console.log(this.calculateStarOfWeek);
-      if (this.calculateStarOfWeek.errors) {
-        alert(
-          "The server responded with error: " +
-            this.calculateStarOfWeek.errors[0].message
-        );
-      } else {
-        if (this.calculateStarOfWeek.pdf) {
-          this.download("star_of_the_week.pdf", this.calculateStarOfWeek.pdf);
-        }
-      }
-      this.loading = false;
+      console.log(this.getConsolidateMarks);
+      this.download("marksheet.csv", this.getConsolidateMarks);
+      this.snackbar = true;
     }
   },
   apollo: {
-    calculateStarOfWeek: {
+    getConsolidateMarks: {
       query: gql`
-        query CalculateStarOfWeek(
+        query GetConsolidateMarks(
           $startDate: String!
           $endDate: String!
           $year: Int!
           $section: String!
         ) {
-          calculateStarOfWeek(
+          getConsolidateMarks(
             startDate: $startDate
             endDate: $endDate
             year: $year
             section: $section
-          ) {
-            pdf
-            errors {
-              message
-            }
-          }
+          )
         }
       `,
       variables() {
