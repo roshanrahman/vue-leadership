@@ -30,6 +30,11 @@
           <br>
 
           <p class="body-2" title="Egg Puffs">Version 0.2.2</p>
+          <p>
+            Copyright 2019
+            <br>Licensed under the Apache License
+            Version 2.0 (the "License")
+          </p>
           <br>
           <div>
             Icons made by
