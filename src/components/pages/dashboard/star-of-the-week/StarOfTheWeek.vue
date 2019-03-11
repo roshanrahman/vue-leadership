@@ -87,21 +87,19 @@ export default {
       loading: false,
       startDate: "",
       endDate: "",
-      regulation: "",
+      regulation: 0,
       section: "",
       showStartDate: false,
       showEndDate: false,
-      calculateStarOfWeek: null,
+      calculateStarOfWeek: {},
       snackbar: false
     };
   },
   mounted() {
     console.log("Mounted");
-    console.log(this.viewRecords);
     this.session = JSON.parse(localStorage.session);
     this.adminId = JSON.parse(localStorage.session).id;
     console.log("USER ID" + this.adminId);
-    this.$apollo.queries.viewRecords.refetch();
   },
   methods: {
     download(filename, text) {
@@ -122,7 +120,7 @@ export default {
     },
     onDownloadClicked() {
       this.loading = true;
-      console.log(this.calculateStarOfWeek);
+      this.$apollo.queries.calculateStarOfWeek.refetch();
       if (this.calculateStarOfWeek.errors) {
         alert(
           "The server responded with error: " +
