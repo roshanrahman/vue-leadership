@@ -10,6 +10,27 @@
             <h4>Enter the session details (Session date: {{ currentDate }})</h4>
             <br>
             <v-form ref="sessionForm">
+              <v-menu
+                v-model="showDate"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                lazy
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <v-text-field
+                  slot="activator"
+                  v-model="sessionDate"
+                  label="Session date"
+                  hint="Enter the date when the session was conducted"
+                  persistent-hint
+                  prepend-icon="event"
+                  readonly
+                ></v-text-field>
+                <v-date-picker v-model="sessionDate" @input="showDate = false"></v-date-picker>
+              </v-menu>
               <v-select
                 :rules="regulationRule"
                 :items="[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]"
@@ -99,13 +120,14 @@ export default {
     return {
       entry: {},
       facultyId: null,
-      currentDate: new Date().toISOString().slice(0, 10),
+      sessionDate: new Date().toISOString().slice(0, 10),
       viewStudents: [],
       viewCourses: [],
       dialogContent: {},
       dialogEnabled: false,
       studentCount: null,
       snackbar: false,
+      showDate: false,
       studentEntryList: null,
       showMarkEntries: false,
       selectedCourse: null,
@@ -249,7 +271,7 @@ export default {
             itemId: i,
             studentId: null,
             points: null,
-            date: this.currentDate
+            date: this.sessionDate
           });
         }
       }
